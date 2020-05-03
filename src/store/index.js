@@ -31,7 +31,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async signIn(context, signInData){
+    async signIn(context, signInData) {
       try {
         const user = (
           await axios.post(config.backend_API + "/user-session", signInData)
