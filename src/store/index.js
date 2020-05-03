@@ -31,10 +31,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async signIn(context){
+    async signIn(context, signInData){
       try {
-        const user = (await axios.get(config.backend_API + "/user-session"))
-          .data;
+        const user = (
+          await axios.post(config.backend_API + "/user-session", signInData)
+        ).data;
+        context.commit("setUser", user);
+      } catch (error) {
+        context.commit("showError", error);
+      }
+    },
+    async register(context, registerData) {
+      try {
+        const user = (
+          await axios.post(config.backend_API + "/users", registerData)
+        ).data;
         context.commit("setUser", user);
       } catch (error) {
         context.commit("showError", error);
