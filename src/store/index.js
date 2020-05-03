@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import config from '../config';
+import config from "../config";
 
 Vue.use(Vuex);
 
