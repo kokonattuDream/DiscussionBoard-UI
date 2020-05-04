@@ -5,7 +5,8 @@
         <b-navbar-brand>Vue Board</b-navbar-brand>
         <b-nav>
           <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="/login">Login/Register</b-nav-item>
+          <b-nav-item v-if="!user" to="/login">Login/Register</b-nav-item>
+          <b-nav-item v-if="user" to="/login">Log out</b-nav-item>
         </b-nav>
       </b-navbar>
     </div>
@@ -35,3 +36,11 @@
   color: #42b983;
 }
 </style>
+<script>
+import { mapState } from "vuex";
+export default {
+  computed: mapState({
+    user: state => state.user
+  })
+}
+</script>

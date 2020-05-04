@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-md-center">
     <div class="col-md-4">
-      <b-form @submit="onSubmit">
+      <b-form>
         <b-form-group
           id="username-input"
           label="Username:"
@@ -9,7 +9,7 @@
         >
           <b-form-input
             id="username"
-            v-model="form.username"
+            v-model="username"
             aria-describedby="input-1-live-feedback"
           ></b-form-input>
         </b-form-group>
@@ -21,7 +21,7 @@
         >
           <b-form-input
             id="password"
-            v-model="form.password"
+            v-model="password"
             type="password"
             required
             aria-describedby="input-2-live-feedback"
@@ -35,7 +35,7 @@
         >
           <b-form-input
             id="confirm_password"
-            v-model="form.confirm_password"
+            v-model="confirm_password"
             type="password"
             required
             aria-describedby="password-help-block"
@@ -44,7 +44,7 @@
 
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="success">Register</b-button>
+            <b-button type="submit" variant="success" @click="onSubmit">Register</b-button>
           </div>
           <div class="col-6">
             <b-button type="reset" variant="secondary" @click="toLogIn"
@@ -61,21 +61,17 @@
 export default {
   data() {
     return {
-      form: {
-        username: "",
-        password: "",
-        confirm_password: ""
-      }
+      username: "",
+      password: "",
+      confirm_password: ""
     };
   },
   methods: {
-    async onSubmit(event) {
-      event.preventDefault();
+    async onSubmit() {
       this.$store.dispatch("register", {
         username: this.username,
         password: this.password
       });
-      //this.$router.push("Home");
     },
     toLogIn() {
       this.$router.push("Login");

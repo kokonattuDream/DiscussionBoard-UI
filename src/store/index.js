@@ -20,17 +20,32 @@ const errorSystem = {
 
 export default new Vuex.Store({
   state: {
-    user: ""
+    user: "",
+    posts: []
   },
   getters: {
-    user: state => state.user
+    user: state => state.user,
+    posts: state => state.posts
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setPosts(state, posts){
+      state.posts = posts;
     }
   },
   actions: {
+    async getAllPosts(context){
+      try{
+        let data = await fetch(config.backend_API + '/posts');
+        let res = await data.json();
+        console.log(res);
+        context.commit("setPosts", res.posts);
+      } catch (error){
+        context.commit("showError", error);
+      }
+    },
     async signIn(context, signInData) {
       console.log(signInData);
       try {
@@ -51,7 +66,8 @@ export default new Vuex.Store({
       try {
         let data = await fetch(config.backend_API + "/users", {
           method: "post",
-          body: registerData
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(registerData)
         });
         let res = await data.json();
         context.commit("setUser", res.user);
