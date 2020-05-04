@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 import config from "../config";
+import router from "../router";
 
 Vue.use(Vuex);
 
@@ -32,21 +32,30 @@ export default new Vuex.Store({
   },
   actions: {
     async signIn(context, signInData) {
+      console.log(signInData);
       try {
-        const user = (
-          await axios.post(config.backend_API + "/user-session", signInData)
-        ).data;
-        context.commit("setUser", user);
+        let data = await fetch(config.backend_API + "/user-session", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signInData)
+        });
+        let res = await data.json();
+        console.log(res.user);
+        context.commit("setUser", res.user);
+        router.push("/");
       } catch (error) {
         context.commit("showError", error);
       }
     },
     async register(context, registerData) {
       try {
-        const user = (
-          await axios.post(config.backend_API + "/users", registerData)
-        ).data;
-        context.commit("setUser", user);
+        let data = await fetch(config.backend_API + "/users", {
+          method: "post",
+          body: registerData
+        });
+        let res = await data.json();
+        context.commit("setUser", res.user);
+        router.push("/");
       } catch (error) {
         context.commit("showError", error);
       }

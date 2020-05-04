@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-md-center">
     <div class="col-md-4">
-      <b-form @submit="onSubmit">
+      <b-form>
         <b-form-group
           id="username-input"
           label="Username:"
@@ -9,7 +9,7 @@
         >
           <b-form-input
             id="username"
-            v-model="form.username"
+            v-model="username"
             required
             placeholder="Enter Username"
           ></b-form-input>
@@ -22,7 +22,7 @@
         >
           <b-form-input
             id="password"
-            v-model="form.password"
+            v-model="password"
             type="password"
             required
             aria-describedby="password-help-block"
@@ -30,7 +30,7 @@
         </b-form-group>
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="success">Submit</b-button>
+            <b-button type="submit" variant="success" @click="onSubmit">Submit</b-button>
           </div>
           <div class="col-6">
             <b-button type="reset" variant="secondary" @click="toRegister">
@@ -49,10 +49,8 @@
 export default {
   data() {
     return {
-      form: {
-        username: "",
-        password: ""
-      }
+      username: "",
+      password: ""
     };
   },
   methods: {
@@ -62,9 +60,8 @@ export default {
         username: this.username,
         password: this.password
       });
-      //this.$router.push("Home");
     },
-    toRegister(){
+    toRegister() {
       this.$router.push("Register");
     }
   }
