@@ -44,10 +44,12 @@
 
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="primary">Register</b-button>
+            <b-button type="submit" variant="success">Register</b-button>
           </div>
           <div class="col-6">
-            <b-button type="reset" variant="secondary" @click="toLogIn">Login</b-button>
+            <b-button type="reset" variant="secondary" @click="toLogIn"
+              >Login</b-button
+            >
           </div>
         </div>
       </b-form>
@@ -56,7 +58,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -76,7 +77,7 @@ export default {
       });
       //this.$router.push("Home");
     },
-    toLogIn(){
+    toLogIn() {
       this.$router.push("Login");
     }
   }

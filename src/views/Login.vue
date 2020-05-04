@@ -30,7 +30,7 @@
         </b-form-group>
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="submit" variant="success">Submit</b-button>
           </div>
           <div class="col-6">
             <b-button type="reset" variant="secondary" @click="toRegister">
