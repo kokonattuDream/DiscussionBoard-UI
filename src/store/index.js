@@ -31,18 +31,18 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user;
     },
-    setPosts(state, posts){
+    setPosts(state, posts) {
       state.posts = posts;
     }
   },
   actions: {
-    async getAllPosts(context){
-      try{
-        let data = await fetch(config.backend_API + '/posts');
+    async getAllPosts(context) {
+      try {
+        let data = await fetch(config.backend_API + "/posts");
         let res = await data.json();
         console.log(res);
         context.commit("setPosts", res.posts);
-      } catch (error){
+      } catch (error) {
         context.commit("showError", error);
       }
     },
@@ -75,7 +75,25 @@ export default new Vuex.Store({
       } catch (error) {
         context.commit("showError", error);
       }
-    }
+    },
+    async createNewPost(context, data){
+      console.log(data);
+      try{
+        let res = await fetch(config.backend_API + "/users", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if(res.status >= 200 && res.status < 300){
+          router.push("/");
+        } else {
+          context.commit("showError", res.statusText);
+        }
+      } catch (error){
+        context.commit("showError", error);
+      }
+    } 
   },
   modules: {
     error: errorSystem

@@ -12,7 +12,7 @@
     </div>
     <div class="row justify-content-end" style="margin-bottom: 20px;">
       <div class="col-sm-2">
-        <b-button variant="outline-danger" @click="createPost">Create New</b-button>
+        <b-button variant="outline-secondary" @click="createPost">Create New</b-button>
       </div>
     </div>
     <b-list-group v-for="post in posts" :key="`${post}`">

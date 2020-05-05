@@ -67,7 +67,8 @@ export default {
     };
   },
   methods: {
-    async onSubmit() {
+    async onSubmit(event) {
+      event.preventDefault();
       this.$store.dispatch("register", {
         username: this.username,
         password: this.password

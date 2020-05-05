@@ -10,10 +10,25 @@
         </nav>
       </div>
     </div>
-    <b-form>
+    <b-form @submit="onSubmit">
       <div class="row justify-content-center">
         <b-form-group id="input-group-2" label="Username:" label-for="input-2">
           {{ user.username }}
+        </b-form-group>
+      </div>
+      <div class="row justify-content-center">
+        <b-form-group
+          id="input-group-3"
+          label="Post Category:"
+          label-for="input-3"
+          description="Select the region of the post topic"
+        >
+          <b-form-select
+            id="input-3"
+            v-model="category"
+            :options="categories"
+            required
+          ></b-form-select>
         </b-form-group>
       </div>
       <div class="row justify-content-center">
@@ -46,6 +61,7 @@
               id="textarea"
               v-model="text"
               rows="8"
+              required
             ></b-form-textarea>
           </b-form-group>
         </div>
@@ -57,7 +73,6 @@
               id="file"
               v-model="file"
               accept=".jpg, .png, .gif"
-              :state="Boolean(file)"
               placeholder="JPG, PNG, GIF files"
               drop-placeholder="Drop file here..."
             ></b-form-file>
@@ -75,6 +90,18 @@ export default {
   name: "NewPost",
   data() {
     return {
+      categories:[
+        "Trip",
+        "Study",
+        "Immigrant",
+        "Work",
+        "Family",
+        "Food",
+        "Finance",
+        "Life",
+        "Friends",
+        "Others"
+      ],
       regions: [
         "Toronto",
         "Vancouver",
@@ -84,8 +111,8 @@ export default {
         "Montreal",
         "Canada"
       ],
+      category:"",
       region: "",
-      name: "",
       title: "",
       text: "",
       file: null
@@ -93,6 +120,19 @@ export default {
   },
   computed: mapState({
     user: state => state.user
-  })
+  }),
+  methods:{
+    async onSubmit(event){
+      event.preventDefault();
+      this.$store.dispatch("createNewPost", {
+        category: this.category,
+        region: this.region,
+        title: this.title,
+        username: this.user.username,
+        text: this.text,
+        file: this.file
+      });
+    }
+  }
 };
 </script>
