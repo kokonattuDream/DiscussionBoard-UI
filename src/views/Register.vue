@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-md-center">
     <div class="col-md-4">
-      <b-form>
+      <b-form @submit="onSubmit">
         <b-form-group
           id="username-input"
           label="Username:"
@@ -44,7 +44,7 @@
 
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="success" @click="onSubmit">Register</b-button>
+            <b-button type="submit" variant="success">Register</b-button>
           </div>
           <div class="col-6">
             <b-button type="reset" variant="secondary" @click="toLogIn"

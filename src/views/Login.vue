@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-md-center">
     <div class="col-md-4">
-      <b-form>
+      <b-form @submit="onSubmit">
         <b-form-group
           id="username-input"
           label="Username:"
@@ -30,7 +30,8 @@
         </b-form-group>
         <div class="row justify-content-between">
           <div class="col-6">
-            <b-button type="submit" variant="success" @click="onSubmit">Submit</b-button>
+            <b-button type="submit" variant="success">Submit</b-button
+            >
           </div>
           <div class="col-6">
             <b-button type="reset" variant="secondary" @click="toRegister">
@@ -38,14 +39,12 @@
             </b-button>
           </div>
         </div>
-
       </b-form>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {

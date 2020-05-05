@@ -6,13 +6,13 @@
           class="navbar navbar-light"
           style=" border-color: black; border-style: solid; background-color: #66ff99;"
         >
-          Discussion Board
+          <strong>Discussion Board</strong>
         </nav>
       </div>
     </div>
     <div class="row justify-content-end" style="margin-bottom: 20px;">
       <div class="col-sm-2">
-        <b-button variant="outline-danger">Create New</b-button>
+        <b-button variant="outline-danger" @click="createPost">Create New</b-button>
       </div>
     </div>
     <b-list-group v-for="post in posts" :key="`${post}`">
@@ -48,6 +48,12 @@ export default {
   }),
   created() {
     this.$store.dispatch("getAllPosts");
+  },
+  methods:{
+    createPost() {
+        this.$router.push("NewPost");
+    }
   }
+  
 };
 </script>
