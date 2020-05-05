@@ -3,7 +3,7 @@
     <div v-if="user" class="text-center">
       Welcome back {{ $store.getters.user.username }}
     </div>
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" width="20%" height="20%" src="../assets/logo.png" />
     <Board />
   </div>
 </template>

@@ -21,7 +21,7 @@
           id="input-group-3"
           label="Post Category:"
           label-for="input-3"
-          description="Select the region of the post topic"
+          description="Select the category of the topic"
         >
           <b-form-select
             id="input-3"
@@ -36,7 +36,7 @@
           id="input-group-3"
           label="Region:"
           label-for="input-3"
-          description="Select the region of the post topic"
+          description="Select the region of the topic"
         >
           <b-form-select
             id="input-3"

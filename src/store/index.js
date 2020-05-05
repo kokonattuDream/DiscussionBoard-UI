@@ -76,24 +76,24 @@ export default new Vuex.Store({
         context.commit("showError", error);
       }
     },
-    async createNewPost(context, data){
+    async createNewPost(context, data) {
       console.log(data);
-      try{
+      try {
         let res = await fetch(config.backend_API + "/users", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
 
-        if(res.status >= 200 && res.status < 300){
+        if (res.status >= 200 && res.status < 300) {
           router.push("/");
         } else {
           context.commit("showError", res.statusText);
         }
-      } catch (error){
+      } catch (error) {
         context.commit("showError", error);
       }
-    } 
+    }
   },
   modules: {
     error: errorSystem

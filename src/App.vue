@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <b-navbar toggleable="lg" type="light" variant="success">
-        <b-navbar-brand>Vue Board</b-navbar-brand>
+        <b-navbar-brand>Virtual Canada Board</b-navbar-brand>
         <b-nav>
           <b-nav-item to="/">Home</b-nav-item>
           <b-nav-item v-if="!user" to="/login">Login/Register</b-nav-item>
