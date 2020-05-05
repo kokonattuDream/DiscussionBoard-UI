@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div>
     <div class="row justify-content-center">
@@ -70,8 +71,8 @@
         <div class="col-sm-4">
           <b-form-group id="input-group-2" label="Image" label-for="input-3">
             <b-form-file
-              id="file"
-              v-model="file"
+              id="image"
+              v-model="image"
               accept=".jpg, .png, .gif"
               placeholder="JPG, PNG, GIF files"
               drop-placeholder="Drop file here..."
@@ -90,7 +91,7 @@ export default {
   name: "NewPost",
   data() {
     return {
-      categories:[
+      categories: [
         "Trip",
         "Study",
         "Immigrant",
@@ -111,18 +112,18 @@ export default {
         "Montreal",
         "Canada"
       ],
-      category:"",
+      category: "",
       region: "",
       title: "",
       text: "",
-      file: null
+      image: null
     };
   },
   computed: mapState({
     user: state => state.user
   }),
-  methods:{
-    async onSubmit(event){
+  methods: {
+    async onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("createNewPost", {
         category: this.category,
@@ -130,7 +131,7 @@ export default {
         title: this.title,
         username: this.user.username,
         text: this.text,
-        file: this.file
+        image: this.image
       });
     }
   }
