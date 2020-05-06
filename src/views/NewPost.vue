@@ -123,7 +123,7 @@ export default {
     user: state => state.user
   }),
   methods: {
-    async onSubmit(event) {
+    onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("createNewPost", {
         category: this.category,

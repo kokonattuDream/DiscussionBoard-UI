@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <b-navbar toggleable="lg" type="light" variant="success">
-        <b-navbar-brand>Virtual Canada Board</b-navbar-brand>
-        <b-nav>
-          <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item v-if="!user" to="/login">Login/Register</b-nav-item>
-          <b-nav-item v-if="user" to="/login">Log out</b-nav-item>
-        </b-nav>
-      </b-navbar>
+    <div id="nav" class="row">
+      <div class="col-xl-12">
+        <b-navbar toggleable="lg" type="light" variant="success">
+          <b-navbar-brand>Virtual Canada Board</b-navbar-brand>
+          <b-nav>
+            <b-nav-item to="/">Home</b-nav-item>
+            <b-nav-item v-if="!user" to="/login">Login/Register</b-nav-item>
+            <b-nav-item v-if="user" to="/login">Log out</b-nav-item>
+          </b-nav>
+        </b-navbar>
+      </div>
     </div>
     <router-view />
   </div>
@@ -42,5 +44,5 @@ export default {
   computed: mapState({
     user: state => state.user
   })
-}
+};
 </script>

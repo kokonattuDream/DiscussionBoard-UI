@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row justify-content-end">
+    <div class="row justify-content-center">
       <div class="col-sm-8" style="margin-bottom: 50px;">
         <nav
           class="navbar navbar-light"
@@ -10,7 +10,7 @@
         </nav>
       </div>
     </div>
-    <div class="row justify-content-end" style="margin-bottom: 20px;">
+    <div class="row justify-content-center" style="margin-bottom: 20px;">
       <div class="col-sm-2">
         <b-button variant="outline-secondary" @click="createPost"
           >Create</b-button
@@ -18,7 +18,7 @@
       </div>
     </div>
     <b-list-group v-for="(post, index) in posts" :key="`${index}`">
-      <div class="row justify-content-end">
+      <div class="row justify-content-center">
         <div class="col-sm-8">
           <b-card>
             <b-card-title>
@@ -27,7 +27,7 @@
               </b-card-text>
             </b-card-title>
             <b-card-text> By {{ post.user.username }} </b-card-text>
-            <b-button @click="viewPost(post._id)" >Go</b-button>
+            <b-button @click="viewPost(post._id)">See Post</b-button>
             <template v-slot:footer>
               <small class="text-muted">
                 {{ new Date(post.create_date).toLocaleString() }}

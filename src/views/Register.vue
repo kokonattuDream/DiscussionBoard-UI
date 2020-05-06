@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    async onSubmit(event) {
+    onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("register", {
         username: this.username,

@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    async onSubmit(event) {
+    onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("signIn", {
         username: this.username,
