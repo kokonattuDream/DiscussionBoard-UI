@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <div v-if="user" class="text-center">
-      Welcome back {{ $store.getters.user.username }}
-    </div>
+    <div v-if="user" class="text-center">Welcome back {{ user.username }}</div>
     <img alt="Vue logo" width="20%" height="20%" src="../assets/logo.png" />
     <Board />
   </div>

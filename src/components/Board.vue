@@ -12,7 +12,9 @@
     </div>
     <div class="row justify-content-end" style="margin-bottom: 20px;">
       <div class="col-sm-2">
-        <b-button variant="outline-secondary" @click="createPost">Create</b-button>
+        <b-button variant="outline-secondary" @click="createPost"
+          >Create</b-button
+        >
       </div>
     </div>
     <b-list-group v-for="(post, index) in posts" :key="`${index}`">
@@ -20,11 +22,12 @@
         <div class="col-sm-8">
           <b-card>
             <b-card-title>
-              <a href="#" class="card-link">
+              <b-card-text class="card-link">
                 {{ post.title }}
-              </a>
+              </b-card-text>
             </b-card-title>
             <b-card-text> By {{ post.user.username }} </b-card-text>
+            <b-button @click="viewPost(post._id)" >Go</b-button>
             <template v-slot:footer>
               <small class="text-muted">
                 {{ new Date(post.create_date).toLocaleString() }}
@@ -50,15 +53,17 @@ export default {
   created() {
     this.$store.dispatch("getAllPosts");
   },
-  methods:{
+  methods: {
     createPost() {
-      if(!this.user){
+      if (!this.user) {
         this.$router.push("Login");
       } else {
         this.$router.push("NewPost");
       }
+    },
+    viewPost(id) {
+      this.$store.dispatch("getPost", id);
     }
   }
-  
 };
 </script>

@@ -21,7 +21,8 @@ const errorSystem = {
 export default new Vuex.Store({
   state: {
     user: "",
-    posts: []
+    posts: [],
+    current_post: ""
   },
   getters: {
     user: state => state.user,
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     setPosts(state, posts) {
       state.posts = posts;
+    },
+    setPost(state, post) {
+      state.current_post = post;
     }
   },
   actions: {
@@ -42,6 +46,45 @@ export default new Vuex.Store({
         let res = await data.json();
         console.log(res);
         context.commit("setPosts", res.posts);
+      } catch (error) {
+        console.error(error);
+        context.commit("showError", error);
+      }
+    },
+    async createNewPost(context, data) {
+      console.log(data);
+      try {
+        let res = await fetch(config.backend_API + "/posts", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (res.status >= 200 && res.status < 300) {
+          router.push("/");
+        } else {
+          console.error(res.statusText);
+          context.commit("showError", res.statusText);
+        }
+      } catch (error) {
+        console.error(error);
+        context.commit("showError", error);
+      }
+    },
+    async getPost(context, id) {
+      console.log(id);
+      try {
+        let data = await fetch(config.backend_API + "/post/" + id);
+        let res = await data.json();
+        console.log(res);
+        context.commit("setPost", res.post);
+
+        if (res) {
+          router.push("/post");
+        } else {
+          console.error(data.statusText);
+          context.commit("showError", data.statusText);
+        }
       } catch (error) {
         console.error(error);
         context.commit("showError", error);
@@ -74,26 +117,6 @@ export default new Vuex.Store({
         let res = await data.json();
         context.commit("setUser", res.user);
         router.push("/");
-      } catch (error) {
-        console.error(error);
-        context.commit("showError", error);
-      }
-    },
-    async createNewPost(context, data) {
-      console.log(data);
-      try {
-        let res = await fetch(config.backend_API + "/posts", {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        if (res.status >= 200 && res.status < 300) {
-          router.push("/");
-        } else {
-          console.error(res.statusText);
-          context.commit("showError", res.statusText);
-        }
       } catch (error) {
         console.error(error);
         context.commit("showError", error);
