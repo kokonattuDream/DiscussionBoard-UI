@@ -44,14 +44,19 @@ export default {
     return {};
   },
   computed: mapState({
-    posts: state => state.posts
+    posts: state => state.posts,
+    user: state => state.user
   }),
   created() {
     this.$store.dispatch("getAllPosts");
   },
   methods:{
     createPost() {
+      if(!this.user){
+        this.$router.push("Login");
+      } else {
         this.$router.push("NewPost");
+      }
     }
   }
   
