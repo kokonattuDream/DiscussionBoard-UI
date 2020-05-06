@@ -15,7 +15,7 @@
         <b-button variant="outline-secondary" @click="createPost">Create</b-button>
       </div>
     </div>
-    <b-list-group v-for="post in posts" :key="`${post}`">
+    <b-list-group v-for="(post, index) in posts" :key="`${index}`">
       <div class="row justify-content-end">
         <div class="col-sm-8">
           <b-card>

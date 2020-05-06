@@ -43,6 +43,7 @@ export default new Vuex.Store({
         console.log(res);
         context.commit("setPosts", res.posts);
       } catch (error) {
+        console.error(error);
         context.commit("showError", error);
       }
     },
@@ -59,6 +60,7 @@ export default new Vuex.Store({
         context.commit("setUser", res.user);
         router.push("/");
       } catch (error) {
+        console.error(error);
         context.commit("showError", error);
       }
     },
@@ -73,13 +75,14 @@ export default new Vuex.Store({
         context.commit("setUser", res.user);
         router.push("/");
       } catch (error) {
+        console.error(error);
         context.commit("showError", error);
       }
     },
     async createNewPost(context, data) {
       console.log(data);
       try {
-        let res = await fetch(config.backend_API + "/users", {
+        let res = await fetch(config.backend_API + "/posts", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
@@ -88,9 +91,11 @@ export default new Vuex.Store({
         if (res.status >= 200 && res.status < 300) {
           router.push("/");
         } else {
+          console.error(res.statusText);
           context.commit("showError", res.statusText);
         }
       } catch (error) {
+        console.error(error);
         context.commit("showError", error);
       }
     }
