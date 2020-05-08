@@ -1,48 +1,67 @@
 <template>
-<div>
-  <div class="row justify-content-center">
-    <div class="col-sm-8">
-      <b-card>
-        <b-card-title>
-          <b-card-text class="card-link">
-            {{ current_post.title }}
-          </b-card-text>
-        </b-card-title>
-        <b-card-text> By {{ current_post.user.username }} </b-card-text>
-        <b-card-text>
-          {{ current_post.text }}
-        </b-card-text>
-        <template v-slot:footer>
-          <div class="row">
-            <div class="col-sm-2">
-              <b-button @click="replyPost">Reply</b-button>
-            </div>
-            <div class="col-sm-8">
-              <small class="text-muted">
-                {{ new Date(current_post.create_date).toLocaleString() }}
-              </small>
-            </div>
-          </div>
-        </template>
-      </b-card>
-    </div>
-  </div>
-  <div class="row justify-content-center" v-if="clickedReply" style="margin: 50px;">
-    <div class="col-sm-8">
+  <div>
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
         <b-card>
-            <b-card-text> Reply </b-card-text>
-      <b-form-group id="input-group-2" label-for="input-2">
+          <b-card-title>
+            <b-card-text class="card-link">
+              {{ current_post.title }}
+            </b-card-text>
+          </b-card-title>
+          <b-card-text> By {{ current_post.user.username }} </b-card-text>
+          <b-card-text>
+            {{ current_post.text }}
+          </b-card-text>
+          <template v-slot:footer>
+            <div class="row">
+              <div class="col-sm-2">
+                <b-button v-if="user" @click="replyPost">Reply</b-button>
+              </div>
+              <div class="col-sm-8">
+                <small class="text-muted">
+                  {{ new Date(current_post.create_date).toLocaleString() }}
+                </small>
+              </div>
+            </div>
+          </template>
+        </b-card>
+      </div>
+    </div>
+    <div
+      class="row justify-content-center"
+      v-if="clickedReply"
+      style="margin: 50px;"
+    >
+      <div class="col-sm-8">
+        <b-card>
+          <b-card-text> Reply </b-card-text>
+          <b-form-group id="input-group-2" label-for="input-2">
             <b-form-textarea
               id="textarea"
               v-model="reply"
               rows="4"
               placeholder="Write Text Here"
             ></b-form-textarea>
-      </b-form-group>
-      <b-button :disabled="!reply" @click="submitReply">Submit</b-button>
-      </b-card>
+          </b-form-group>
+          <b-button :disabled="!reply" @click="submitReply">Submit</b-button>
+        </b-card>
       </div>
-  </div>
+    </div>
+    <div v-for="(post_reply, index) in current_post.replies" :key="`${index}`">
+    <div
+      class="row justify-content-center"
+      style="margin: 10px;"
+    >
+        <div class="col-sm-8">
+          <b-card>
+            <div class="row">
+                <b-card-sub-title>{{post_reply.user.username}}</b-card-sub-title>
+            </div>
+            <b-card-text>{{post_reply.text}}</b-card-text>
+          </b-card>
+        </div>
+    </div>
+    </div>
   </div>
 </template>
 <script>
@@ -54,18 +73,22 @@ export default {
     user: state => state.user,
     current_post: state => state.current_post
   }),
-  data(){
+  data() {
     return {
-        clickedReply: false,
-        reply: ""
-    }
+      clickedReply: false,
+      reply: ""
+    };
   },
-  methods:{
-    replyPost(){
-        this.clickedReply = true;
+  methods: {
+    replyPost() {
+      this.clickedReply = true;
     },
-    submitReply(){
-        this
+    submitReply() {
+      this.$store.dispatch("submitReply", {
+        user: this.user.username,
+        reply: this.reply,
+        post: this.current_post._id
+      });
     }
   }
 };
