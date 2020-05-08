@@ -48,19 +48,19 @@
       </div>
     </div>
     <div v-for="(post_reply, index) in current_post.replies" :key="`${index}`">
-    <div
-      class="row justify-content-center"
-      style="margin: 10px;"
-    >
+      <div class="row justify-content-center" style="margin: 10px;">
         <div class="col-sm-8">
           <b-card>
             <div class="row">
-                <b-card-sub-title>{{post_reply.user.username}}</b-card-sub-title>
+              <b-card-sub-title
+                >Comment {{ index }} by
+                {{ post_reply.user.username }}</b-card-sub-title
+              >
             </div>
-            <b-card-text>{{post_reply.text}}</b-card-text>
+            <b-card-text>{{ post_reply.text }}</b-card-text>
           </b-card>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -84,6 +84,7 @@ export default {
       this.clickedReply = true;
     },
     submitReply() {
+      this.clickedReply = false;
       this.$store.dispatch("submitReply", {
         user: this.user.username,
         reply: this.reply,

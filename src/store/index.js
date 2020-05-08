@@ -80,7 +80,10 @@ export default new Vuex.Store({
         context.commit("setPost", res.post);
 
         if (res) {
-          router.push("/post");
+          console.log(router.currentRoute.path);
+          if (router.currentRoute.path != "/post") {
+            router.push("/post");
+          }
         } else {
           console.error(data.statusText);
           context.commit("showError", data.statusText);
@@ -90,24 +93,24 @@ export default new Vuex.Store({
         context.commit("showError", error);
       }
     },
-    async submitReply(context, reply){
+    async submitReply(context, reply) {
       console.log(reply);
       try {
-        let data = await fetch(config.backend_API + "/replies", {
+        let res = await fetch(config.backend_API + "/replies", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(reply)
         });
-        console.log(data);
-        let res = await data.json();
+
         if (res.status >= 200 && res.status < 300) {
           console.log(reply.post);
-          context.commit("getPost", reply.post);
+          context.dispatch("getPost", reply.post);
         } else {
           console.error(res.statusText);
           context.commit("showError", res.statusText);
         }
       } catch (error) {
+        console.log("getPost fail");
         console.error(error);
         context.commit("showError", error);
       }
