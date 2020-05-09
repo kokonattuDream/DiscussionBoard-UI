@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Board :user="`${this.user}`" />
+    <Board />
   </div>
 </template>
 

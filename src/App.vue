@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="row justify-content-center">
-        <Title id="title"/>
-      </div>
+      <Title id="title" />
+    </div>
     <div id="nav" class="row">
       <div class="col-xl-12">
         <b-navbar toggleable="lg" type="light" variant="success">

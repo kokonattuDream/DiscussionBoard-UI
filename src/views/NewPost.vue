@@ -1,16 +1,5 @@
-/* eslint-disable prettier/prettier */
 <template>
   <div>
-    <div class="row justify-content-center">
-      <div class="col-sm-10" style="margin-bottom: 50px;">
-        <nav
-          class="navbar navbar-light"
-          style=" border-color: black; border-style: solid; background-color: #66ff99;"
-        >
-          <strong>New Post</strong>
-        </nav>
-      </div>
-    </div>
     <b-form @submit="onSubmit">
       <div class="row justify-content-center">
         <b-form-group id="input-group-2" label="Username:" label-for="input-2">

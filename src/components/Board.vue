@@ -51,12 +51,12 @@
 import { mapState } from "vuex";
 export default {
   name: "Board",
-  props: ["user"],
   data() {
     return {};
   },
   computed: mapState({
-    posts: state => state.post.posts
+    posts: state => state.post.posts,
+    user: state => state.user.user
   }),
   created() {
     this.$store.dispatch("post/getAllPosts");
