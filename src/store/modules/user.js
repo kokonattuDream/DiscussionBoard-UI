@@ -2,7 +2,7 @@ import config from "../../config";
 import router from "../../router";
 
 export default {
-  namespaced: true, 
+  namespaced: true,
   state: {
     user: ""
   },
@@ -44,12 +44,18 @@ export default {
         console.error(error);
         context.commit("showError", error);
       }
+    },
+    async logout(context) {
+      context.commit("clearUser");
     }
   },
 
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    clearUser(state) {
+      state.user = null;
     }
   }
 };
