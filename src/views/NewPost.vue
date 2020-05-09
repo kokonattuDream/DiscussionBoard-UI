@@ -56,19 +56,6 @@
           </b-form-group>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-4">
-          <b-form-group id="input-group-2" label="Image" label-for="input-3">
-            <b-form-file
-              id="image"
-              v-model="image"
-              accept=".jpg, .png, .gif"
-              placeholder="JPG, PNG, GIF files"
-              drop-placeholder="Drop file here..."
-            ></b-form-file>
-          </b-form-group>
-        </div>
-      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -104,8 +91,7 @@ export default {
       category: "",
       region: "",
       title: "",
-      text: "",
-      image: null
+      text: ""
     };
   },
   computed: mapState({
@@ -119,8 +105,7 @@ export default {
         region: this.region,
         title: this.title,
         username: this.user.username,
-        text: this.text,
-        image: this.image
+        text: this.text
       });
     }
   }
