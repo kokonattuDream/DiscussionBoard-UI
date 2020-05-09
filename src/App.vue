@@ -1,13 +1,25 @@
 <template>
   <div id="app">
     <div id="nav" class="row">
+
       <div class="col-xl-12">
         <b-navbar toggleable="lg" type="light" variant="success">
-          <b-navbar-brand>Virtual Canada Board</b-navbar-brand>
           <b-nav>
-            <b-nav-item to="/">Home</b-nav-item>
-            <b-nav-item v-if="!user" to="/login">Login/Register</b-nav-item>
-            <b-nav-item v-if="user" to="/" @click="logout">Log out</b-nav-item>
+            <b-nav-item to="/">
+              <span>
+                Home
+              </span>
+            </b-nav-item>
+            <b-nav-item v-if="!user" to="/login">
+              <span>
+                Login/Register
+              </span>
+            </b-nav-item>
+            <b-nav-item v-if="user" to="/" @click="logout">
+              <span>
+                Log out
+              </span>
+            </b-nav-item>
           </b-nav>
         </b-navbar>
       </div>
@@ -37,15 +49,20 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+span {
+  color: black;
+  font-size: 20px;
+}
 </style>
 <script>
 import { mapState } from "vuex";
 export default {
-  computed: mapState("user",{
+  computed: mapState("user", {
     user: state => state.user
   }),
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$store.dispatch("user/logout");
     }
   }

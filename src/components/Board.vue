@@ -2,16 +2,18 @@
   <div>
     <div class="row justify-content-center">
       <div class="col-sm-8" style="margin-bottom: 50px;">
+        
         <nav
           class="navbar navbar-light"
-          style=" border-color: black; border-style: solid; background-color: #66ff99;"
+          style=" border-color: black; border-style: solid; background-color: #66ff99; font-size:40px;"
         >
-          <strong>Discussion Board</strong>
+          <strong>Canada Discussion Board</strong>
+           <img alt="Vue logo" width="10%" height="10%" src="../assets/logo.png" />
         </nav>
       </div>
     </div>
-    <div class="row justify-content-center" style="margin-bottom: 20px;">
-      <div class="col-sm-2">
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-sm-5">
         <b-button variant="outline-secondary" @click="createPost"
           >Create</b-button
         >
@@ -22,7 +24,19 @@
         <div class="col-sm-8">
           <b-card>
             <b-card-title>
-              <b-card-text class="card-link">
+              <b-card-header>
+                <div class="row justify-content-start" style="margin-bottom: 10px;">
+                  <b-card-text style="font-size:16px">
+                    {{ post.region }}
+                  </b-card-text>
+                </div>
+                <div class="row justify-content-start">
+                  <b-card-sub-title>
+                    {{ post.category }}
+                  </b-card-sub-title>
+                </div>
+              </b-card-header>
+              <b-card-text class="card-link" style="margin: 10px; font-size: 30px;">
                 {{ post.title }}
               </b-card-text>
             </b-card-title>
@@ -43,12 +57,12 @@
 import { mapState } from "vuex";
 export default {
   name: "Board",
+  props: ["user"],
   data() {
     return {};
   },
   computed: mapState({
-    posts: state => state.post.posts,
-    user: state => state.user.user
+    posts: state => state.post.posts
   }),
   created() {
     this.$store.dispatch("post/getAllPosts");
