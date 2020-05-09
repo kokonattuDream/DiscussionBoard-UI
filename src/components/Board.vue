@@ -1,21 +1,9 @@
 <template>
   <div>
-    <div class="row justify-content-center">
-      <div class="col-sm-8" style="margin-bottom: 50px;">
-        
-        <nav
-          class="navbar navbar-light"
-          style=" border-color: black; border-style: solid; background-color: #66ff99; font-size:40px;"
-        >
-          <strong>Canada Discussion Board</strong>
-           <img alt="Vue logo" width="10%" height="10%" src="../assets/logo.png" />
-        </nav>
-      </div>
-    </div>
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-sm-5">
         <b-button variant="outline-secondary" @click="createPost"
-          >Create</b-button
+          >New Post</b-button
         >
       </div>
     </div>
@@ -25,7 +13,10 @@
           <b-card>
             <b-card-title>
               <b-card-header>
-                <div class="row justify-content-start" style="margin-bottom: 10px;">
+                <div
+                  class="row justify-content-start"
+                  style="margin-bottom: 10px;"
+                >
                   <b-card-text style="font-size:16px">
                     {{ post.region }}
                   </b-card-text>
@@ -36,7 +27,10 @@
                   </b-card-sub-title>
                 </div>
               </b-card-header>
-              <b-card-text class="card-link" style="margin: 10px; font-size: 30px;">
+              <b-card-text
+                class="card-link"
+                style="margin: 10px; font-size: 30px;"
+              >
                 {{ post.title }}
               </b-card-text>
             </b-card-title>

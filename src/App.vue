@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+    <div class="row justify-content-center">
+        <Title id="title"/>
+      </div>
     <div id="nav" class="row">
-
       <div class="col-xl-12">
         <b-navbar toggleable="lg" type="light" variant="success">
           <b-nav>
@@ -54,13 +56,21 @@ span {
   color: black;
   font-size: 20px;
 }
+#title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 </style>
 <script>
 import { mapState } from "vuex";
+import Title from "./components/Title";
 export default {
   computed: mapState("user", {
     user: state => state.user
   }),
+  components: {
+    Title
+  },
   methods: {
     logout() {
       this.$store.dispatch("user/logout");

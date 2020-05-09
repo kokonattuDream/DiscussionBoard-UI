@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <div v-if="user" class="text-center">Welcome back {{ user.username }}</div>
     <Board :user="`${this.user}`" />
   </div>
 </template>
