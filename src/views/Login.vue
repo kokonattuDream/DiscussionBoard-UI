@@ -54,7 +54,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$store.dispatch("signIn", {
+      this.$store.dispatch("user/signIn", {
         username: this.username,
         password: this.password
       });

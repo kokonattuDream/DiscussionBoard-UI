@@ -69,7 +69,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$store.dispatch("register", {
+      this.$store.dispatch("user/register", {
         username: this.username,
         password: this.password
       });

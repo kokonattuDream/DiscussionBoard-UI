@@ -16,7 +16,7 @@ export default {
     Board
   },
   computed: mapState({
-    user: state => state.user
+    user: state => state.user.user
   })
 };
 </script>

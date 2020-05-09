@@ -47,11 +47,11 @@ export default {
     return {};
   },
   computed: mapState({
-    posts: state => state.posts,
-    user: state => state.user
+    posts: state => state.post.posts,
+    user: state => state.user.user
   }),
   created() {
-    this.$store.dispatch("getAllPosts");
+    this.$store.dispatch("post/getAllPosts");
   },
   methods: {
     createPost() {
@@ -62,7 +62,7 @@ export default {
       }
     },
     viewPost(id) {
-      this.$store.dispatch("getPost", id);
+      this.$store.dispatch("post/getPost", id);
     }
   }
 };

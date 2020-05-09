@@ -120,12 +120,12 @@ export default {
     };
   },
   computed: mapState({
-    user: state => state.user
+    user: state => state.user.user
   }),
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$store.dispatch("createNewPost", {
+      this.$store.dispatch("post/createNewPost", {
         category: this.category,
         region: this.region,
         title: this.title,

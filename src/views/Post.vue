@@ -70,8 +70,8 @@ import { mapState } from "vuex";
 export default {
   name: "Post",
   computed: mapState({
-    user: state => state.user,
-    current_post: state => state.current_post
+    user: state => state.user.user,
+    current_post: state => state.post.current_post
   }),
   data() {
     return {
@@ -85,7 +85,7 @@ export default {
     },
     submitReply() {
       this.clickedReply = false;
-      this.$store.dispatch("submitReply", {
+      this.$store.dispatch("post/addReply", {
         user: this.user.username,
         reply: this.reply,
         post: this.current_post._id
