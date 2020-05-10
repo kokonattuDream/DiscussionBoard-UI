@@ -56,6 +56,13 @@
           </b-form-group>
         </div>
       </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-8">
+          <b-form-group id="input-group-2" label="Image" label-for="input-2">
+            <b-form-file id="image" v-model="image"></b-form-file>
+          </b-form-group>
+        </div>
+      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -63,35 +70,23 @@
 
 <script>
 import { mapState } from "vuex";
+import constants from "../constants/constants";
 export default {
   name: "NewPost",
   data() {
+    let categories = [...constants.categories];
+    let regions = [...constants.regions];
+    categories.splice(0, 1);
+    regions.splice(0, 1);
+
     return {
-      categories: [
-        "Trip",
-        "Study",
-        "Immigrant",
-        "Work",
-        "Family",
-        "Food",
-        "Finance",
-        "Life",
-        "Friends",
-        "Others"
-      ],
-      regions: [
-        "Toronto",
-        "Vancouver",
-        "Victoria",
-        "Calgary",
-        "Ottawa",
-        "Montreal",
-        "Canada"
-      ],
+      categories: categories,
+      regions: regions,
       category: "",
       region: "",
       title: "",
-      text: ""
+      text: "",
+      image: null
     };
   },
   computed: mapState({
@@ -101,11 +96,14 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("post/createNewPost", {
-        category: this.category,
-        region: this.region,
-        title: this.title,
-        username: this.user.username,
-        text: this.text
+        data: {
+          category: this.category,
+          region: this.region,
+          title: this.title,
+          text: this.text,
+          username: this.user.username
+        },
+        image: this.image
       });
     }
   }

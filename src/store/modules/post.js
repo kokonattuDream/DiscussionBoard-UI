@@ -17,13 +17,12 @@ export default {
 
   actions: {
     async searchPosts(context, form) {
-      try{
+      try {
         context.commit("setDisplayPosts", form);
-      } catch(error){
+      } catch (error) {
         console.error(error);
         context.commit("showError", error);
       }
-      
     },
     async getAllPosts(context) {
       try {
@@ -36,13 +35,18 @@ export default {
         context.commit("showError", error);
       }
     },
-    async createNewPost(context, data) {
-      console.log(data);
+    async createNewPost(context, form) {
+      console.log(form);
+      const data = new FormData();
+      data.append("file", form.image);
+      data.append("data", JSON.stringify(form.data));
       try {
         let res = await fetch(config.backend_API + "/posts", {
           method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          body: data //JSON.stringify(data)
         });
 
         if (res.status >= 200 && res.status < 300) {

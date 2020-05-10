@@ -12,6 +12,13 @@
           <b-card-text>
             {{ current_post.text }}
           </b-card-text>
+          <b-img
+            fluid
+            alt="Responsive image"
+            v-if="current_post.imageUrl"
+            :src="`${current_post.imageUrl}`"
+          />
+
           <template v-slot:footer>
             <div class="row">
               <div class="col-sm-2">
