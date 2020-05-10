@@ -83,7 +83,7 @@ export default {
         "Toronto",
         "Vancouver",
         "Victoria",
-        "Calgry",
+        "Calgary",
         "Ottawa",
         "Montreal",
         "Canada"

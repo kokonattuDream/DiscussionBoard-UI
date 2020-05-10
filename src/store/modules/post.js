@@ -2,18 +2,29 @@ import config from "../../config";
 import router from "../../router";
 
 export default {
-  namespaced: true, 
+  namespaced: true,
   state: {
     posts: [],
-    current_post: ""
+    current_post: "",
+    display_posts: []
   },
 
   getters: {
     posts: state => state.posts,
+    display_posts: state => state.display_posts,
     current_post: state => state.current_post
   },
 
   actions: {
+    async searchPosts(context, form) {
+      try{
+        context.commit("setDisplayPosts", form);
+      } catch(error){
+        console.error(error);
+        context.commit("showError", error);
+      }
+      
+    },
     async getAllPosts(context) {
       try {
         let data = await fetch(config.backend_API + "/posts");
@@ -94,9 +105,29 @@ export default {
   mutations: {
     setPosts(state, posts) {
       state.posts = posts;
+      state.display_posts = posts;
+      console.log(state.display_posts);
     },
     setPost(state, post) {
       state.current_post = post;
+    },
+    setDisplayPosts(state, form) {
+      let posts = state.posts;
+      if (form.category) {
+        posts = posts.filter(post => post.category === form.category);
+      }
+      if (form.region) {
+        posts = posts.filter(post => post.region === form.region);
+      }
+      if (form.keyword) {
+        const regex = new RegExp(form.keyword, "i");
+        posts = posts.filter(post => {
+          return post.title.match(regex) || post.text.match(regex);
+        });
+      }
+      console.log(posts);
+      console.log(state.posts);
+      state.display_posts = posts;
     }
   }
 };

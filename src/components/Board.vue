@@ -1,7 +1,41 @@
 <template>
   <div>
-    <div class="row" style="margin-bottom: 20px;">
-      <div class="col-sm-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-2">
+        <b-form-group id="input-group-3" label="Category:" label-for="input-3">
+          <b-form-select
+            id="input-3"
+            v-model="form.category"
+            :options="categories"
+          ></b-form-select>
+        </b-form-group>
+      </div>
+      <div class="col-sm-2">
+        <b-form-group id="input-group-3" label="Region:" label-for="input-3">
+          <b-form-select
+            id="input-3"
+            v-model="form.region"
+            :options="regions"
+          ></b-form-select>
+        </b-form-group>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <b-form-input
+          id="input-2"
+          v-model="form.keyword"
+          placeholder="Enter Keyword"
+        ></b-form-input>
+      </div>
+    </div>
+    <div class="row justify-content-center" style="margin: 20px;">
+      <div class="col-sm-2">
+        <b-button variant="outline-secondary" @click="searchPost"
+          >Search</b-button
+        >
+      </div>
+      <div class="col-sm-2">
         <b-button variant="outline-secondary" @click="createPost"
           >New Post</b-button
         >
@@ -49,13 +83,22 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import constants from "../constants/constants";
 export default {
   name: "Board",
   data() {
-    return {};
+    return {
+      form: {
+        category: "",
+        region: "",
+        keyword: ""
+      },
+      categories: constants.categories,
+      regions: constants.regions
+    };
   },
   computed: mapState({
-    posts: state => state.post.posts,
+    posts: state => state.post.display_posts,
     user: state => state.user.user
   }),
   created() {
@@ -68,6 +111,9 @@ export default {
       } else {
         this.$router.push("NewPost");
       }
+    },
+    searchPost() {
+      this.$store.dispatch("post/searchPosts", this.form);
     },
     viewPost(id) {
       this.$store.dispatch("post/getPost", id);
