@@ -68,12 +68,18 @@
                 {{ post.title }}
               </b-card-text>
             </b-card-title>
-            <b-card-text> By {{ post.user.username }} </b-card-text>
             <b-button @click="viewPost(post._id)">See Post</b-button>
             <template v-slot:footer>
-              <small class="text-muted">
-                {{ new Date(post.create_date).toLocaleString() }}
-              </small>
+              <div class="row">
+                <div class="col-sm-2">
+                <b-card-text> By {{ post.user.username }} </b-card-text>
+                </div>
+                <div class="col-sm-8">              
+                  <small class="text-muted">
+                    {{ new Date(post.create_date).toLocaleString() }}
+                  </small>
+                </div>
+              </div>
             </template>
           </b-card>
         </div>
