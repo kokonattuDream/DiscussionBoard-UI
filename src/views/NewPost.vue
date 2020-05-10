@@ -58,8 +58,17 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-sm-8">
-          <b-form-group id="input-group-2" label="Image" label-for="input-2">
-            <b-form-file id="image" v-model="image"></b-form-file>
+          <b-form-group
+            id="input-group-2"
+            label="Image"
+            description="Accept jpg, png, gif files"
+            label-for="input-2"
+          >
+            <b-form-file
+              accept=".jpg, .png, .gif"
+              id="image"
+              v-model="image"
+            ></b-form-file>
           </b-form-group>
         </div>
       </div>
@@ -103,7 +112,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      
+
       this.$store.dispatch("post/createNewPost", {
         data: {
           category: this.category,
