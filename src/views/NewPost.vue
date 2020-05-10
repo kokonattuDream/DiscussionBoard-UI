@@ -63,6 +63,13 @@
           </b-form-group>
         </div>
       </div>
+      <div v-if="this.spinning" class="row justify-content-center">
+        <b-spinner
+          variant="primary"
+          label="Spinning"
+          style="margin:20px"
+        ></b-spinner>
+      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -90,11 +97,13 @@ export default {
     };
   },
   computed: mapState({
-    user: state => state.user.user
+    user: state => state.user.user,
+    spinning: state => state.actionResponse.post_submission_loading
   }),
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      
       this.$store.dispatch("post/createNewPost", {
         data: {
           category: this.category,

@@ -21,7 +21,7 @@ export default {
         context.commit("setDisplayPosts", form);
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/showError", error, { root: true });
       }
     },
     async getAllPosts(context) {
@@ -32,10 +32,11 @@ export default {
         context.commit("setPosts", res.posts);
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/showError", error, { root: true });
       }
     },
     async createNewPost(context, form) {
+      context.commit("actionResponse/runSpinner", null, { root: true });
       console.log(form);
       const data = new FormData();
       data.append("file", form.image);
@@ -50,14 +51,17 @@ export default {
         });
 
         if (res.status >= 200 && res.status < 300) {
+          context.commit("actionResponse/endSpinner", null, { root: true });
           router.push("/");
         } else {
           console.error(res.statusText);
-          context.commit("showError", res.statusText);
+          context.commit("actionResponse/showError", res.statusText, {
+            root: true
+          });
         }
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/showError", error, { root: true });
       }
     },
     async getPost(context, id) {
@@ -75,11 +79,13 @@ export default {
           }
         } else {
           console.error(data.statusText);
-          context.commit("showError", data.statusText);
+          context.commit("actionResponse/showError", data.statusText, {
+            root: true
+          });
         }
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/showError", error, { root: true });
       }
     },
     async addReply(context, reply) {
@@ -96,12 +102,14 @@ export default {
           context.dispatch("getPost", reply.post);
         } else {
           console.error(res.statusText);
-          context.commit("showError", res.statusText);
+          context.commit("actionResponse/showError", res.statusText, {
+            root: true
+          });
         }
       } catch (error) {
         console.log("getPost fail");
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/showError", error, { root: true });
       }
     }
   },
