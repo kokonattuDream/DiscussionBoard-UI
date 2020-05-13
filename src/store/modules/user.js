@@ -33,6 +33,7 @@ export default {
       try {
         let data = await fetch(config.backend_API + "/users", {
           method: "post",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(registerData)
         });
@@ -48,6 +49,7 @@ export default {
     async logout(context) {
       try{
         let res = await fetch(config.backend_API + "/user-session/", {
+          credentials: "include",
           method: "delete"
         });
 

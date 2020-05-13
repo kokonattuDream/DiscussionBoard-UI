@@ -26,7 +26,10 @@ export default {
     },
     async getAllPosts(context) {
       try {
-        let data = await fetch(config.backend_API + "/posts");
+        let data = await fetch(config.backend_API + "/posts",{
+          method: "get",
+          credentials: "include"
+        });
         let res = await data.json();
         console.log(res);
         context.commit("setPosts", res.posts);
@@ -47,6 +50,7 @@ export default {
           header: {
             "Content-Type": "multipart/form-data"
           },
+          credentials: "include",
           body: data //JSON.stringify(data)
         });
 
@@ -67,7 +71,10 @@ export default {
     async getPost(context, id) {
       console.log(id);
       try {
-        let data = await fetch(config.backend_API + "/post/" + id);
+        let data = await fetch(config.backend_API + "/post/" + id, {
+          credentials: "include",
+          method: "get"
+        });
         let res = await data.json();
         console.log(res);
         context.commit("setPost", res.post);
@@ -93,6 +100,7 @@ export default {
       try {
         let res = await fetch(config.backend_API + "/replies", {
           method: "post",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(reply)
         });
