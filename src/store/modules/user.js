@@ -18,6 +18,7 @@ export default {
         let data = await fetch(config.backend_API + "/user-session", {
           method: "post",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(signInData)
         });
         let res = await data.json();
@@ -47,7 +48,7 @@ export default {
       }
     },
     async logout(context) {
-      try{
+      try {
         let res = await fetch(config.backend_API + "/user-session/", {
           credentials: "include",
           method: "delete"
@@ -58,8 +59,7 @@ export default {
         } else {
           context.commit("showError", res.statusText);
         }
-        
-      } catch(error){
+      } catch (error) {
         console.error(error);
         context.commit("showError", error);
       }
