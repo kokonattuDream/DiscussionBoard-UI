@@ -46,7 +46,21 @@ export default {
       }
     },
     async logout(context) {
-      context.commit("clearUser");
+      try{
+        let res = await fetch(config.backend_API + "/user-session/", {
+          method: "delete"
+        });
+
+        if (res.status >= 200 && res.status < 300) {
+          context.commit("clearUser");
+        } else {
+          context.commit("showError", res.statusText);
+        }
+        
+      } catch(error){
+        console.error(error);
+        context.commit("showError", error);
+      }
     }
   },
 

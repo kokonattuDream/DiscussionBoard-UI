@@ -60,7 +60,7 @@
           <b-card>
             <div class="row">
               <b-card-sub-title
-                >Comment {{ index }} by
+                >Comment {{ index + 1 }} by
                 {{ post_reply.user.username }}</b-card-sub-title
               >
             </div>
