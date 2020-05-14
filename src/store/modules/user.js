@@ -71,22 +71,17 @@ export default {
     },
     async logout(context) {
       try {
-        let res = await fetch(config.backend_API + "/user-session/", {
+        await fetch(config.backend_API + "/user-session/", {
           credentials: "include",
           method: "delete"
         });
-
-        if (res.status >= 200 && res.status < 300) {
-          context.commit("clearUser");
-        } else {
-          context.commit("actionResponse/registerError", res.statusText, {
-            root: true
-          });
-        }
+        context.commit("clearUser");
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/registerError", error, { root: true });
+        context.commit("clearUser");
       }
+      localStorage.clear();
+      window.location.reload();
     }
   },
 

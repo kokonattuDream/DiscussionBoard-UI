@@ -34,6 +34,12 @@
         </b-card>
       </div>
     </div>
+     <div
+      class="row justify-content-center">
+    <b-alert :show="this.error_message != ''" variant="danger">{{
+          this.error_message
+        }}</b-alert>
+      </div>
     <div
       class="row justify-content-center"
       v-if="clickedReply"
@@ -87,7 +93,8 @@ export default {
   name: "Post",
   computed: mapState({
     user: state => state.user.user,
-    current_post: state => state.post.current_post
+    current_post: state => state.post.current_post,
+    error_message: state => state.actionResponse.add_reply_error
   }),
   data() {
     return {
@@ -101,6 +108,7 @@ export default {
     },
     deleteReply() {
       this.clickedReply = false;
+      this.reply = "";
     },
     submitReply() {
       this.clickedReply = false;

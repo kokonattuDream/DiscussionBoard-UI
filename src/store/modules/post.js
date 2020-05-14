@@ -115,9 +115,13 @@ export default {
           context.dispatch("getPost", reply.post);
         } else {
           console.error(res.statusText);
-          context.commit("actionResponse/addReplayError", "Adde Reply Failed", {
-            root: true
-          });
+          context.commit(
+            "actionResponse/addReplayError",
+            "Reply Submit Failed",
+            {
+              root: true
+            }
+          );
         }
       } catch (error) {
         console.log("getPost fail");
