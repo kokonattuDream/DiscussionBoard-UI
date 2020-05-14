@@ -9,13 +9,13 @@ const state = () => ({
 });
 
 const mutations = {
-  resetError(state) {
-    state.create_post_error = "";
-    state.get_post_error = "";
-    state.get_all_posts_error = "";
-    state.add_reply_error = "";
-    state.register_error = "";
-    state.login_error = "";
+  resetError(state, error_type) {
+    state[error_type] = "";
+    state[error_type] = "";
+    state[error_type] = "";
+    state[error_type] = "";
+    state[error_type] = "";
+    state[error_type] = "";
   },
   registerError(state, message){
     state.register_error = message;

@@ -28,6 +28,9 @@
             aria-describedby="password-help-block"
           ></b-form-input>
         </b-form-group>
+        <b-alert :show="this.error_message != ''" variant="danger">{{
+          this.error_message
+        }}</b-alert>
         <div class="row justify-content-between">
           <div class="col-6">
             <b-button type="submit" variant="success">Submit</b-button>
@@ -44,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -51,6 +55,9 @@ export default {
       password: ""
     };
   },
+  computed: mapState({
+    error_message: state => state.actionResponse.login_error
+  }),
   methods: {
     onSubmit(event) {
       event.preventDefault();

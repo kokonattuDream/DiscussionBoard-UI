@@ -4,11 +4,13 @@ import router from "../../router";
 export default {
   namespaced: true,
   state: {
-    user: ""
+    user: "",
+    showingError: false
   },
 
   getters: {
-    user: state => state.user
+    user: state => state.user,
+    showingError: state => state.showingError
   },
 
   actions: {
@@ -22,9 +24,19 @@ export default {
           body: JSON.stringify(signInData)
         });
         let res = await data.json();
-        console.log(res.user);
-        context.commit("setUser", res.user);
-        router.push("/");
+        if (!res.user) {
+          context.commit("actionResponse/loginError", "Login Failed", {
+            root: true
+          });
+        } else {
+          context.commit("setUser", res.user);
+          if (context.rootState.actionResponse.login_error) {
+            context.commit("actionResponse/resetError", "login_error", {
+              root: true
+            });
+          }
+          router.push("/");
+        }
       } catch (error) {
         console.error(error);
         context.commit("actionResponse/loginError", error, { root: true });
@@ -39,9 +51,19 @@ export default {
           body: JSON.stringify(registerData)
         });
         let res = await data.json();
-        console.log(res);
-        context.commit("setUser", res.user);
-        router.push("/");
+        if (res.user) {
+          context.commit("setUser", res.user);
+          if (context.rootState.actionResponse.register_error) {
+            context.commit("actionResponse/resetError", "register_error", {
+              root: true
+            });
+          }
+          router.push("/");
+        } else {
+          context.commit("actionResponse/registerError", "Register Failed", {
+            root: true
+          });
+        }
       } catch (error) {
         console.error(error);
         context.commit("actionResponse/registerError", error, { root: true });
@@ -57,7 +79,9 @@ export default {
         if (res.status >= 200 && res.status < 300) {
           context.commit("clearUser");
         } else {
-          context.commit("actionResponse/registerError", res.statusText, { root: true });
+          context.commit("actionResponse/registerError", res.statusText, {
+            root: true
+          });
         }
       } catch (error) {
         console.error(error);
