@@ -50,7 +50,14 @@
               placeholder="Write Text Here"
             ></b-form-textarea>
           </b-form-group>
-          <b-button :disabled="!reply" @click="submitReply">Submit</b-button>
+          <div class="row justify-content-center">
+            <div class="col-sm-2">
+              <b-button :disabled="!reply" @click="submitReply">Submit</b-button>
+            </div>
+            <div class="col-sm-2">
+              <b-button variant="danger" @click="deleteReply">Delete</b-button>
+            </div>
+          </div>
         </b-card>
       </div>
     </div>
@@ -89,6 +96,9 @@ export default {
   methods: {
     replyPost() {
       this.clickedReply = true;
+    },
+    deleteReply(){
+      this.clickedReply = false;
     },
     submitReply() {
       this.clickedReply = false;
