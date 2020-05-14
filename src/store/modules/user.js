@@ -44,25 +44,35 @@ export default {
     },
     async register(context, registerData) {
       try {
-        let data = await fetch(config.backend_API + "/users", {
-          method: "post",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(registerData)
-        });
-        let res = await data.json();
-        if (res.user) {
-          context.commit("setUser", res.user);
-          if (context.rootState.actionResponse.register_error) {
-            context.commit("actionResponse/resetError", "register_error", {
+        if (registerData.password !== registerData.confirm_password) {
+          context.commit(
+            "actionResponse/registerError",
+            "Password and Confirm Password have to match",
+            {
+              root: true
+            }
+          );
+        } else {
+          let data = await fetch(config.backend_API + "/users", {
+            method: "post",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(registerData)
+          });
+          let res = await data.json();
+          if (res.user) {
+            context.commit("setUser", res.user);
+            if (context.rootState.actionResponse.register_error) {
+              context.commit("actionResponse/resetError", "register_error", {
+                root: true
+              });
+            }
+            router.push("/");
+          } else {
+            context.commit("actionResponse/registerError", "Register Failed", {
               root: true
             });
           }
-          router.push("/");
-        } else {
-          context.commit("actionResponse/registerError", "Register Failed", {
-            root: true
-          });
         }
       } catch (error) {
         console.error(error);

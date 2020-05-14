@@ -41,7 +41,9 @@
             aria-describedby="password-help-block"
           ></b-form-input>
         </b-form-group>
-
+        <b-alert :show="this.error_message != ''" variant="danger">{{
+          this.error_message
+        }}</b-alert>
         <div class="row justify-content-between">
           <div class="col-6">
             <b-button type="submit" variant="success">Register</b-button>
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -66,12 +69,16 @@ export default {
       confirm_password: ""
     };
   },
+  computed: mapState({
+    error_message: state => state.actionResponse.register_error
+  }),
   methods: {
     onSubmit(event) {
       event.preventDefault();
       this.$store.dispatch("user/register", {
         username: this.username,
-        password: this.password
+        password: this.password,
+        confirm_password: this.confirm_password
       });
     },
     toLogIn() {
