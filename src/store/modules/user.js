@@ -27,7 +27,7 @@ export default {
         router.push("/");
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/loginError", error, { root: true });
       }
     },
     async register(context, registerData) {
@@ -44,7 +44,7 @@ export default {
         router.push("/");
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/registerError", error, { root: true });
       }
     },
     async logout(context) {
@@ -57,11 +57,11 @@ export default {
         if (res.status >= 200 && res.status < 300) {
           context.commit("clearUser");
         } else {
-          context.commit("showError", res.statusText);
+          context.commit("actionResponse/registerError", res.statusText, { root: true });
         }
       } catch (error) {
         console.error(error);
-        context.commit("showError", error);
+        context.commit("actionResponse/registerError", error, { root: true });
       }
     }
   },

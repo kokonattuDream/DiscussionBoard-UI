@@ -17,16 +17,11 @@ export default {
 
   actions: {
     async searchPosts(context, form) {
-      try {
-        context.commit("setDisplayPosts", form);
-      } catch (error) {
-        console.error(error);
-        context.commit("actionResponse/showError", error, { root: true });
-      }
+      context.commit("setDisplayPosts", form);
     },
     async getAllPosts(context) {
       try {
-        let data = await fetch(config.backend_API + "/posts",{
+        let data = await fetch(config.backend_API + "/posts", {
           method: "get",
           credentials: "include"
         });
@@ -35,7 +30,7 @@ export default {
         context.commit("setPosts", res.posts);
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/showError", error, { root: true });
+        context.commit("actionResponse/getAllPostsError", "Get Posts Failed", { root: true });
       }
     },
     async createNewPost(context, form) {
@@ -59,13 +54,19 @@ export default {
           router.push("/");
         } else {
           console.error(res.statusText);
-          context.commit("actionResponse/showError", res.statusText, {
-            root: true
-          });
+          context.commit(
+            "actionResponse/createPostError",
+            "Create Post Failed",
+            {
+              root: true
+            }
+          );
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/showError", error, { root: true });
+        context.commit("actionResponse/createPostError", "Create Post Failed", {
+          root: true
+        });
       }
     },
     async getPost(context, id) {
@@ -86,13 +87,13 @@ export default {
           }
         } else {
           console.error(data.statusText);
-          context.commit("actionResponse/showError", data.statusText, {
+          context.commit("actionResponse/getPostError", "Post Not Found", {
             root: true
           });
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/showError", error, { root: true });
+        context.commit("actionResponse/getPostError", "Post Not Found", { root: true });
       }
     },
     async addReply(context, reply) {
@@ -110,14 +111,14 @@ export default {
           context.dispatch("getPost", reply.post);
         } else {
           console.error(res.statusText);
-          context.commit("actionResponse/showError", res.statusText, {
+          context.commit("actionResponse/addReplayError", "Adde Reply Failed", {
             root: true
           });
         }
       } catch (error) {
         console.log("getPost fail");
         console.error(error);
-        context.commit("actionResponse/showError", error, { root: true });
+        context.commit("actionResponse/addReplayError", "Adde Reply Failed", { root: true });
       }
     }
   },
