@@ -9,32 +9,36 @@ const state = () => ({
 });
 
 const mutations = {
-  resetError(state, error_type) {
-    state[error_type] = "";
-    state[error_type] = "";
-    state[error_type] = "";
-    state[error_type] = "";
-    state[error_type] = "";
-    state[error_type] = "";
-  },
-  registerError(state, message){
+  async registerError(state, message){
     state.register_error = message;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.register_error = "";
   },
-  loginError(state, message){
+  async loginError(state, message){
     state.login_error = message;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.login_error = "";
   },
-  getAllPostsError(state, message){
+  async getAllPostsError(state, message){
     state.get_all_posts_error = message;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.get_all_posts_error = "";
   },
-  createPostError(state, message){
+  async createPostError(state, message){
     state.create_post_error = message;
     state.post_submission_loading = false;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.create_post_error = "";
   },
-  getPostError(state, message){
+  async getPostError(state, message){
     state.get_post_error = message;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.get_post_error = "";
   },
-  addReplayError(state, message){
+  async addReplayError(state, message){
     state.add_reply_error = message;
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    state.add_reply_error = "";
   },
   runSpinner(state) {
     state.post_submission_loading = true;

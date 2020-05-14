@@ -52,7 +52,9 @@
           </b-form-group>
           <div class="row justify-content-center">
             <div class="col-sm-2">
-              <b-button :disabled="!reply" @click="submitReply">Submit</b-button>
+              <b-button :disabled="!reply" @click="submitReply"
+                >Submit</b-button
+              >
             </div>
             <div class="col-sm-2">
               <b-button variant="danger" @click="deleteReply">Delete</b-button>
@@ -97,7 +99,7 @@ export default {
     replyPost() {
       this.clickedReply = true;
     },
-    deleteReply(){
+    deleteReply() {
       this.clickedReply = false;
     },
     submitReply() {

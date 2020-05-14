@@ -30,11 +30,6 @@ export default {
           });
         } else {
           context.commit("setUser", res.user);
-          if (context.rootState.actionResponse.login_error) {
-            context.commit("actionResponse/resetError", "login_error", {
-              root: true
-            });
-          }
           router.push("/");
         }
       } catch (error) {
@@ -62,11 +57,6 @@ export default {
           let res = await data.json();
           if (res.user) {
             context.commit("setUser", res.user);
-            if (context.rootState.actionResponse.register_error) {
-              context.commit("actionResponse/resetError", "register_error", {
-                root: true
-              });
-            }
             router.push("/");
           } else {
             context.commit("actionResponse/registerError", "Register Failed", {

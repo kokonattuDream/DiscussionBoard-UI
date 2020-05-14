@@ -79,6 +79,11 @@
           style="margin:20px"
         ></b-spinner>
       </div>
+      <div class="row justify-content-center">
+        <b-alert :show="this.error_message != ''" variant="danger"
+          >{{ this.error_message }}
+        </b-alert>
+      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -107,7 +112,8 @@ export default {
   },
   computed: mapState({
     user: state => state.user.user,
-    spinning: state => state.actionResponse.post_submission_loading
+    spinning: state => state.actionResponse.post_submission_loading,
+    error_message: state => state.actionResponse.create_post_error
   }),
   methods: {
     onSubmit(event) {

@@ -30,12 +30,14 @@ export default {
         context.commit("setPosts", res.posts);
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/getAllPostsError", "Get Posts Failed", { root: true });
+        context.commit("actionResponse/getAllPostsError", "Get Posts Failed", {
+          root: true
+        });
       }
     },
     async createNewPost(context, form) {
       context.commit("actionResponse/runSpinner", null, { root: true });
-      console.log(form);
+      //console.log(form);
       const data = new FormData();
       data.append("file", form.image);
       data.append("data", JSON.stringify(form.data));
@@ -64,7 +66,7 @@ export default {
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/createPostError", "Create Post Failed", {
+        context.commit("actionResponse/createPostError", "Post Submit Failed", {
           root: true
         });
       }
@@ -93,7 +95,9 @@ export default {
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/getPostError", "Post Not Found", { root: true });
+        context.commit("actionResponse/getPostError", "Post Not Found", {
+          root: true
+        });
       }
     },
     async addReply(context, reply) {
@@ -118,7 +122,9 @@ export default {
       } catch (error) {
         console.log("getPost fail");
         console.error(error);
-        context.commit("actionResponse/addReplayError", "Adde Reply Failed", { root: true });
+        context.commit("actionResponse/addReplayError", "Adde Reply Failed", {
+          root: true
+        });
       }
     }
   },
