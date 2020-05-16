@@ -34,12 +34,11 @@
         </b-card>
       </div>
     </div>
-     <div
-      class="row justify-content-center">
-    <b-alert :show="this.error_message != ''" variant="danger">{{
-          this.error_message
-        }}</b-alert>
-      </div>
+    <div class="row justify-content-center">
+      <b-alert :show="this.error_message != ''" variant="danger">{{
+        this.error_message
+      }}</b-alert>
+    </div>
     <div
       class="row justify-content-center"
       v-if="clickedReply"
@@ -69,19 +68,36 @@
         </b-card>
       </div>
     </div>
-    <div v-for="(post_reply, index) in current_post.replies" :key="`${index}`">
+    <div
+      v-for="(post_reply, index) in pageData(current_post.replies)"
+      :key="`${index}`"
+    >
       <div class="row justify-content-center" style="margin: 10px;">
         <div class="col-sm-8">
           <b-card>
             <div class="row">
               <b-card-sub-title
-                >Comment {{ index + 1 }} by
+                >Comment {{ (pageNumber - 1) * 10 + index + 1 }} by
                 {{ post_reply.user.username }}</b-card-sub-title
               >
             </div>
             <b-card-text>{{ post_reply.text }}</b-card-text>
           </b-card>
         </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" style="margin: 10px;">
+      <div class="col-sm-2">
+        <b-button :disabled="this.pageNumber == 1" @click="prevReplies"
+          >Prev</b-button
+        >
+      </div>
+      <div class="col-sm-2">
+        <b-button
+          :disabled="this.pageNumber * 10 >= current_post.replies.length"
+          @click="nextReplies"
+          >Next</b-button
+        >
       </div>
     </div>
   </div>
@@ -99,7 +115,8 @@ export default {
   data() {
     return {
       clickedReply: false,
-      reply: ""
+      reply: "",
+      pageNumber: 1
     };
   },
   methods: {
@@ -117,6 +134,21 @@ export default {
         reply: this.reply,
         post: this.current_post._id
       });
+    },
+    pageData(replies) {
+      if (!replies) {
+        return replies;
+      } else {
+        let start = (this.pageNumber - 1) * 10;
+        let end = start + 10 > replies.length ? replies.length : start + 10;
+        return replies.slice(start, end);
+      }
+    },
+    nextReplies() {
+      this.pageNumber++;
+    },
+    prevReplies() {
+      this.pageNumber--;
     }
   }
 };

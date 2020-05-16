@@ -6,16 +6,21 @@ export default {
   state: {
     posts: [],
     current_post: "",
-    display_posts: []
+    display_posts: [],
+    page_number: 1
   },
 
   getters: {
     posts: state => state.posts,
     display_posts: state => state.display_posts,
-    current_post: state => state.current_post
+    current_post: state => state.current_post,
+    page_number: state => state.page_number
   },
 
   actions: {
+    async setPageNumber(context, num) {
+      context.commit("setPageNumber", num);
+    },
     async searchPosts(context, form) {
       context.commit("setDisplayPosts", form);
     },
@@ -134,6 +139,9 @@ export default {
   },
 
   mutations: {
+    setPageNumber(state, num){
+      state.page_number = num;
+    },
     setPosts(state, posts) {
       state.posts = posts;
       state.display_posts = posts;

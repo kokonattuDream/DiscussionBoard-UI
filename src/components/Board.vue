@@ -87,13 +87,13 @@
     </b-list-group>
     <div class="row justify-content-center" style="margin: 10px;">
       <div class="col-sm-2">
-        <b-button :disabled="this.pageNumber == 1" @click="prevPage"
+        <b-button :disabled="this.page_number == 1" @click="prevPage"
           >Prev</b-button
         >
       </div>
       <div class="col-sm-2">
         <b-button
-          :disabled="this.pageNumber * 10 >= posts.length"
+          :disabled="this.page_number * 10 >= posts.length"
           @click="nextPage"
           >Next</b-button
         >
@@ -114,24 +114,25 @@ export default {
         keyword: ""
       },
       categories: constants.categories,
-      regions: constants.regions,
-      pageNumber: 1
+      regions: constants.regions
     };
   },
   computed: mapState({
     posts: state => state.post.display_posts,
-    user: state => state.user.user
+    user: state => state.user.user,
+    page_number: state => state.post.page_number
   }),
   created() {
     this.$store.dispatch("post/getAllPosts");
   },
   methods: {
-    pageData(posts){
-      if(!posts){
+    pageData(posts) {
+      if (!posts) {
         return posts;
       } else {
-        let start = (this.pageNumber - 1) * 10;
-        let end = (start + 10) > this.posts.length ? this.posts.length : start + 10;
+        let start = (this.page_number - 1) * 10;
+        let end =
+          start + 10 > this.posts.length ? this.posts.length : start + 10;
         return posts.slice(start, end);
       }
     },
@@ -149,10 +150,10 @@ export default {
       this.$store.dispatch("post/getPost", id);
     },
     nextPage() {
-      this.pageNumber++;
+      this.$store.dispatch("post/setPageNumber", this.page_number + 1);
     },
     prevPage() {
-      this.pageNumber--;
+      this.$store.dispatch("post/setPageNumber", this.page_number - 1);
     }
   }
 };
