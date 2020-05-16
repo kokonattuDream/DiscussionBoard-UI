@@ -41,7 +41,7 @@
         >
       </div>
     </div>
-    <b-list-group v-for="(post, index) in posts" :key="`${index}`">
+    <b-list-group v-for="(post, index) in pageData(posts)" :key="`${index}`">
       <div class="row justify-content-center">
         <div class="col-sm-8">
           <b-card>
@@ -72,9 +72,9 @@
             <template v-slot:footer>
               <div class="row">
                 <div class="col-sm-2">
-                <b-card-text> By {{ post.user.username }} </b-card-text>
+                  <b-card-text> By {{ post.user.username }} </b-card-text>
                 </div>
-                <div class="col-sm-8">              
+                <div class="col-sm-8">
                   <small class="text-muted">
                     {{ new Date(post.updated_date).toLocaleString() }}
                   </small>
@@ -85,6 +85,20 @@
         </div>
       </div>
     </b-list-group>
+    <div class="row justify-content-center" style="margin: 10px;">
+      <div class="col-sm-2">
+        <b-button :disabled="this.pageNumber == 1" @click="prevPage"
+          >Prev</b-button
+        >
+      </div>
+      <div class="col-sm-2">
+        <b-button
+          :disabled="this.pageNumber * 10 >= posts.length"
+          @click="nextPage"
+          >Next</b-button
+        >
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -100,7 +114,8 @@ export default {
         keyword: ""
       },
       categories: constants.categories,
-      regions: constants.regions
+      regions: constants.regions,
+      pageNumber: 1
     };
   },
   computed: mapState({
@@ -111,6 +126,15 @@ export default {
     this.$store.dispatch("post/getAllPosts");
   },
   methods: {
+    pageData(posts){
+      if(!posts){
+        return posts;
+      } else {
+        let start = (this.pageNumber - 1) * 10;
+        let end = (start + 10) > this.posts.length ? this.posts.length : start + 10;
+        return posts.slice(start, end);
+      }
+    },
     createPost() {
       if (!this.user) {
         this.$router.push("Login");
@@ -123,6 +147,12 @@ export default {
     },
     viewPost(id) {
       this.$store.dispatch("post/getPost", id);
+    },
+    nextPage() {
+      this.pageNumber++;
+    },
+    prevPage() {
+      this.pageNumber--;
     }
   }
 };
