@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-sm-8">              
                   <small class="text-muted">
-                    {{ new Date(post.create_date).toLocaleString() }}
+                    {{ new Date(post.updated_date).toLocaleString() }}
                   </small>
                 </div>
               </div>
