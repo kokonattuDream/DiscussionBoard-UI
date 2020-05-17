@@ -31,6 +31,10 @@ export default {
         } else {
           context.commit("setUser", res.user);
           router.push("/");
+
+          setInterval(() => {
+            context.commit("clearUser");
+          }, 30 * 60 * 1000);
         }
       } catch (error) {
         console.error(error);
@@ -58,6 +62,11 @@ export default {
           if (res.user) {
             context.commit("setUser", res.user);
             router.push("/");
+
+            setInterval(() => {
+              context.commit("clearUser");
+            }, 30 * 60 * 1000);
+
           } else {
             context.commit("actionResponse/registerError", "Register Failed", {
               root: true

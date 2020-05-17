@@ -139,7 +139,7 @@ export default {
   },
 
   mutations: {
-    setPageNumber(state, num){
+    setPageNumber(state, num) {
       state.page_number = num;
     },
     setPosts(state, posts) {
