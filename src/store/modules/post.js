@@ -164,9 +164,8 @@ export default {
           return post.title.match(regex) || post.text.match(regex);
         });
       }
-      console.log(posts);
-      console.log(state.posts);
       state.display_posts = posts;
+      state.page_number = 1;
     }
   }
 };
