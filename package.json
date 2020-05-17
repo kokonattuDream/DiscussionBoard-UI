@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js", 
+    "start": "node server.js",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.13.0",
+    "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.4",
     "express": "^4.17.1",
     "semantic-ui-vue": "^0.10.1",
