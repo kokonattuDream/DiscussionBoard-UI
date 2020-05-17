@@ -79,7 +79,7 @@ export default {
     async getPost(context, id) {
       console.log(id);
       try {
-        let data = await fetch(config.backend_API + "/post/" + id, {
+        let data = await fetch(config.backend_API + "/posts/" + id, {
           credentials: "include",
           method: "get"
         });
