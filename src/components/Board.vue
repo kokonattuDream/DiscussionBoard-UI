@@ -21,7 +21,9 @@
       </div>
     </div>
     <div class="row justify-content-center">
+      
       <div class="col-sm-6">
+        <b-icon icon="search"/>
         <b-form-input
           id="input-2"
           v-model="form.keyword"
@@ -78,6 +80,10 @@
                   <small class="text-muted">
                     {{ new Date(post.updated_date).toLocaleString() }}
                   </small>
+                </div>
+                <div class="col-sm-2">
+                  <b-icon icon="chat-fill"></b-icon>
+                  <b-card-text>{{ post.replies.length }}</b-card-text>
                 </div>
               </div>
             </template>
