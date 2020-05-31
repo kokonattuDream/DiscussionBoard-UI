@@ -79,7 +79,7 @@ export default {
     async getPost(context, id) {
       console.log(id);
       try {
-        let data = await fetch(config.backend_API + "/post/" + id, {
+        let data = await fetch(config.backend_API + "/posts/" + id, {
           credentials: "include",
           method: "get"
         });
@@ -139,7 +139,7 @@ export default {
   },
 
   mutations: {
-    setPageNumber(state, num){
+    setPageNumber(state, num) {
       state.page_number = num;
     },
     setPosts(state, posts) {
@@ -164,9 +164,8 @@ export default {
           return post.title.match(regex) || post.text.match(regex);
         });
       }
-      console.log(posts);
-      console.log(state.posts);
       state.display_posts = posts;
+      state.page_number = 1;
     }
   }
 };

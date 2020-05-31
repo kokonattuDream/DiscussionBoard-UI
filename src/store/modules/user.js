@@ -31,42 +31,44 @@ export default {
         } else {
           context.commit("setUser", res.user);
           router.push("/");
+
+          setInterval(() => {
+            context.commit("clearUser");
+          }, 30 * 60 * 1000);
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/loginError", error, { root: true });
+        context.commit("actionResponse/loginError", "Login Failed", {
+          root: true
+        });
       }
     },
     async register(context, registerData) {
       try {
-        if (registerData.password !== registerData.confirm_password) {
-          context.commit(
-            "actionResponse/registerError",
-            "Password and Confirm Password have to match",
-            {
-              root: true
-            }
-          );
+        let data = await fetch(config.backend_API + "/users", {
+          method: "post",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(registerData)
+        });
+        let res = await data.json();
+        if (res.user) {
+          context.commit("setUser", res.user);
+          router.push("/");
+
+          setInterval(() => {
+            context.commit("clearUser");
+          }, 30 * 60 * 1000);
         } else {
-          let data = await fetch(config.backend_API + "/users", {
-            method: "post",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(registerData)
+          context.commit("actionResponse/registerError", "Register Failed", {
+            root: true
           });
-          let res = await data.json();
-          if (res.user) {
-            context.commit("setUser", res.user);
-            router.push("/");
-          } else {
-            context.commit("actionResponse/registerError", "Register Failed", {
-              root: true
-            });
-          }
         }
       } catch (error) {
         console.error(error);
-        context.commit("actionResponse/registerError", error, { root: true });
+        context.commit("actionResponse/registerError", "Register Failed", {
+          root: true
+        });
       }
     },
     async logout(context) {
