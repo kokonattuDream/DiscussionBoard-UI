@@ -1,8 +1,19 @@
 # Discussion Board
 
-This is a discussion board that users can create a post on the website. They can reply to other's post to communicate 
+This is a discussion board that users can communicate with other people on the website. It currently supports below features
 
-with other users. They can also share pictures in the post. 
+- Registeration, Log in/out
+
+- View posts
+
+- Search posts based on the target region, category and keyword
+
+- Create a post (Only for sign-in users) 
+
+- Share a picture in the post (Only for sign-in users) 
+
+- Reply to a post (Only for sign-in users)
+
 
 URL:
 https://discussion-board-front-end.herokuapp.com/
