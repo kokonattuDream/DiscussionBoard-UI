@@ -8,6 +8,9 @@ URL:
 https://discussion-board-front-end.herokuapp.com/
 
 
+## Tech Stack
+
+Vue.js & Vuex
 
 ## Project setup
 ```
