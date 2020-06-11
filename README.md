@@ -1,8 +1,8 @@
 # Discussion Board
 
-This is a discussion board that users can create a post on the website. They can reply to other users's post to communicate 
+This is a discussion board that users can create a post on the website. They can reply to other's post to communicate 
 
-with others. They can also share pictures in the post. 
+with other users. They can also share pictures in the post. 
 
 URL:
 https://discussion-board-front-end.herokuapp.com/
