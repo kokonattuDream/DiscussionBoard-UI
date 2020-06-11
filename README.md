@@ -1,5 +1,13 @@
 # Discussion Board
+
+This is a discussion board that users can create a post on the website. They can reply to other users's post to communicate 
+
+with others. They can also share pictures in the post. 
+
+URL:
 https://discussion-board-front-end.herokuapp.com/
+
+
 
 ## Project setup
 ```
@@ -16,20 +24,3 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
