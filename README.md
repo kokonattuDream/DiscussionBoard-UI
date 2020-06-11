@@ -12,6 +12,8 @@ https://discussion-board-front-end.herokuapp.com/
 
 Vue.js & Vuex
 
+## Picture
+![Screenshot](https://github.com/kokonattuDream/DiscussionBoard/blob/master/pic.jpg)
 ## Project setup
 ```
 npm install
