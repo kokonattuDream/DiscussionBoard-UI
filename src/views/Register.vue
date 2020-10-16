@@ -51,7 +51,7 @@
           </validation-provider>
 
           <validation-provider
-            name="confirm_password"
+            name="confirmPassword"
             rules="required|password:@password"
             v-slot="validationContext"
           >
@@ -61,9 +61,9 @@
               label-for="password"
             >
               <b-form-input
-                id="confirm_password"
-                name="confirm_password"
-                v-model="confirm_password"
+                id="confirmPassword"
+                name="confirmPassword"
+                v-model="confirmPassword"
                 type="password"
                 aria-describedby="password-help-block"
                 :state="getValidationState(validationContext)"
@@ -73,8 +73,8 @@
               }}</b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
-          <b-alert :show="error_message != ''" variant="danger">{{
-            error_message
+          <b-alert :show="errorMessage != ''" variant="danger">{{
+            errorMessage
           }}</b-alert>
           <div class="row justify-content-between">
             <div class="col-6">
@@ -109,11 +109,11 @@ export default {
     return {
       username: "",
       password: "",
-      confirm_password: ""
+      confirmPassword: ""
     };
   },
   computed: mapState({
-    error_message: state => state.actionResponse.register_error
+    errorMessage: state => state.actionResponse.registerError
   }),
   methods: {
     getValidationState({ dirty, validated, valid = null }) {
@@ -123,7 +123,7 @@ export default {
       this.$store.dispatch("user/register", {
         username: this.username,
         password: this.password,
-        confirm_password: this.confirm_password
+        confirmPassword: this.confirmPassword
       });
     },
     toLogIn() {

@@ -5,16 +5,16 @@ export default {
   namespaced: true,
   state: {
     posts: [],
-    current_post: "",
-    display_posts: [],
-    page_number: 1
+    currentPost: "",
+    displayPosts: [],
+    pageNumber: 1
   },
 
   getters: {
     posts: state => state.posts,
-    display_posts: state => state.display_posts,
-    current_post: state => state.current_post,
-    page_number: state => state.page_number
+    displayPosts: state => state.displayPosts,
+    currentPost: state => state.currentPost,
+    pageNumber: state => state.pageNumber
   },
 
   actions: {
@@ -26,7 +26,7 @@ export default {
     },
     async getAllPosts(context) {
       try {
-        let data = await fetch(config.backend_API + "/posts", {
+        let data = await fetch(config.backendAPI + "/posts", {
           method: "get",
           credentials: "include"
         });
@@ -47,7 +47,7 @@ export default {
       data.append("file", form.image);
       data.append("data", JSON.stringify(form.data));
       try {
-        let res = await fetch(config.backend_API + "/posts", {
+        let res = await fetch(config.backendAPI + "/posts", {
           method: "post",
           header: {
             "Content-Type": "multipart/form-data"
@@ -79,7 +79,7 @@ export default {
     async getPost(context, id) {
       console.log(id);
       try {
-        let data = await fetch(config.backend_API + "/posts/" + id, {
+        let data = await fetch(config.backendAPI + "/posts/" + id, {
           credentials: "include",
           method: "get"
         });
@@ -108,7 +108,7 @@ export default {
     async addReply(context, reply) {
       console.log(reply);
       try {
-        let res = await fetch(config.backend_API + "/replies", {
+        let res = await fetch(config.backendAPI + "/replies", {
           method: "post",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -140,15 +140,15 @@ export default {
 
   mutations: {
     setPageNumber(state, num) {
-      state.page_number = num;
+      state.pageNumber = num;
     },
     setPosts(state, posts) {
       state.posts = posts;
-      state.display_posts = posts;
-      console.log(state.display_posts);
+      state.displayPosts = posts;
+      console.log(state.displayPosts);
     },
     setPost(state, post) {
-      state.current_post = post;
+      state.currentPost = post;
     },
     setDisplayPosts(state, form) {
       let posts = state.posts;
@@ -164,8 +164,8 @@ export default {
           return post.title.match(regex) || post.text.match(regex);
         });
       }
-      state.display_posts = posts;
-      state.page_number = 1;
+      state.displayPosts = posts;
+      state.pageNumber = 1;
     }
   }
 };

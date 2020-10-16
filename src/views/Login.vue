@@ -46,8 +46,8 @@
               }}</b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
-          <b-alert :show="error_message != ''" variant="danger">{{
-            error_message
+          <b-alert :show="errorMessage != ''" variant="danger">{{
+            errorMessage
           }}</b-alert>
           <div class="row justify-content-between">
             <div class="col-6">
@@ -75,7 +75,7 @@ export default {
     };
   },
   computed: mapState({
-    error_message: state => state.actionResponse.login_error
+    errorMessage: state => state.actionResponse.loginError
   }),
   methods: {
     getValidationState({ dirty, validated, valid = null }) {

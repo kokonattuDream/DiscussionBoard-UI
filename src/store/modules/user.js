@@ -17,7 +17,7 @@ export default {
     async signIn(context, signInData) {
       console.log(signInData);
       try {
-        let data = await fetch(config.backend_API + "/user-session", {
+        let data = await fetch(config.backendAPI + "/user-session", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -45,7 +45,7 @@ export default {
     },
     async register(context, registerData) {
       try {
-        let data = await fetch(config.backend_API + "/users", {
+        let data = await fetch(config.backendAPI + "/users", {
           method: "post",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ export default {
     },
     async logout(context) {
       try {
-        await fetch(config.backend_API + "/user-session/", {
+        await fetch(config.backendAPI + "/user-session/", {
           credentials: "include",
           method: "delete"
         });

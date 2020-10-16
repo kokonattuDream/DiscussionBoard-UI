@@ -5,18 +5,18 @@
         <b-card>
           <b-card-title>
             <b-card-text class="card-link">
-              {{ current_post.title }}
+              {{ currentPost.title }}
             </b-card-text>
           </b-card-title>
-          <b-card-text> By {{ current_post.user.username }} </b-card-text>
+          <b-card-text> By {{ currentPost.user.username }} </b-card-text>
           <b-card-text>
-            {{ current_post.text }}
+            {{ currentPost.text }}
           </b-card-text>
           <b-img
             fluid
             alt="Responsive image"
-            v-if="current_post.imageUrl"
-            :src="`${current_post.imageUrl}`"
+            v-if="currentPost.imageUrl"
+            :src="`${currentPost.imageUrl}`"
           />
 
           <template v-slot:footer>
@@ -26,7 +26,7 @@
               </div>
               <div class="col-sm-8">
                 <small class="text-muted">
-                  {{ new Date(current_post.create_date).toLocaleString() }}
+                  {{ new Date(currentPost.createDate).toLocaleString() }}
                 </small>
               </div>
             </div>
@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <b-alert :show="this.error_message != ''" variant="danger">{{
-        this.error_message
+      <b-alert :show="this.errorMessage != ''" variant="danger">{{
+        this.errorMessage
       }}</b-alert>
     </div>
     <div
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div
-      v-for="(post_reply, index) in pageData(current_post.replies)"
+      v-for="(postReply, index) in pageData(currentPost.replies)"
       :key="`${index}`"
     >
       <div class="row justify-content-center" style="margin: 10px;">
@@ -78,10 +78,10 @@
             <div class="row">
               <b-card-sub-title
                 >Comment {{ (pageNumber - 1) * 10 + index + 1 }} by
-                {{ post_reply.user.username }}</b-card-sub-title
+                {{ postReply.user.username }}</b-card-sub-title
               >
             </div>
-            <b-card-text>{{ post_reply.text }}</b-card-text>
+            <b-card-text>{{ postReply.text }}</b-card-text>
           </b-card>
         </div>
       </div>
@@ -94,7 +94,7 @@
       </div>
       <div class="col-sm-2">
         <b-button
-          :disabled="this.pageNumber * 10 >= current_post.replies.length"
+          :disabled="this.pageNumber * 10 >= currentPost.replies.length"
           @click="nextReplies"
           >Next</b-button
         >
@@ -109,8 +109,8 @@ export default {
   name: "Post",
   computed: mapState({
     user: state => state.user.user,
-    current_post: state => state.post.current_post,
-    error_message: state => state.actionResponse.add_reply_error
+    currentPost: state => state.post.currentPost,
+    errorMessage: state => state.actionResponse.addReplyError
   }),
   data() {
     return {
@@ -132,7 +132,7 @@ export default {
       this.$store.dispatch("post/addReply", {
         user: this.user.username,
         reply: this.reply,
-        post: this.current_post._id
+        post: this.currentPost._id
       });
     },
     pageData(replies) {

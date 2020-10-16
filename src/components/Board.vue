@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-sm-8">
                   <small class="text-muted">
-                    {{ new Date(post.updated_date).toLocaleString() }}
+                    {{ new Date(post.updatedDate).toLocaleString() }}
                   </small>
                 </div>
                 <div class="col-sm-2">
@@ -93,13 +93,13 @@
     </b-list-group>
     <div class="row justify-content-center" style="margin: 10px;">
       <div class="col-sm-2">
-        <b-button :disabled="this.page_number == 1" @click="prevPage"
+        <b-button :disabled="this.pageNumber == 1" @click="prevPage"
           >Prev</b-button
         >
       </div>
       <div class="col-sm-2">
         <b-button
-          :disabled="this.page_number * 10 >= posts.length"
+          :disabled="this.pageNumber * 10 >= posts.length"
           @click="nextPage"
           >Next</b-button
         >
@@ -124,9 +124,9 @@ export default {
     };
   },
   computed: mapState({
-    posts: state => state.post.display_posts,
+    posts: state => state.post.displayPosts,
     user: state => state.user.user,
-    page_number: state => state.post.page_number
+    pageNumber: state => state.post.pageNumber
   }),
   created() {
     this.$store.dispatch("post/getAllPosts");
@@ -136,7 +136,7 @@ export default {
       if (!posts) {
         return posts;
       } else {
-        let start = (this.page_number - 1) * 10;
+        let start = (this.pageNumber - 1) * 10;
         let end =
           start + 10 > this.posts.length ? this.posts.length : start + 10;
         return posts.slice(start, end);
@@ -156,10 +156,10 @@ export default {
       this.$store.dispatch("post/getPost", id);
     },
     nextPage() {
-      this.$store.dispatch("post/setPageNumber", this.page_number + 1);
+      this.$store.dispatch("post/setPageNumber", this.pageNumber + 1);
     },
     prevPage() {
-      this.$store.dispatch("post/setPageNumber", this.page_number - 1);
+      this.$store.dispatch("post/setPageNumber", this.pageNumber - 1);
     }
   }
 };
