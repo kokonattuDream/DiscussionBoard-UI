@@ -15,7 +15,6 @@ export default {
 
   actions: {
     async signIn(context, signInData) {
-      console.log(signInData);
       try {
         let data = await fetch(config.backendAPI + "/user-session", {
           method: "post",
@@ -29,6 +28,8 @@ export default {
             root: true
           });
         } else {
+          console.log(res.session);
+          console.log(res.cookie);
           context.commit("setUser", res.user);
           router.push("/");
 

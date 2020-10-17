@@ -31,7 +31,6 @@ export default {
           credentials: "include"
         });
         let res = await data.json();
-        console.log(res);
         context.commit("setPosts", res.posts);
       } catch (error) {
         console.error(error);
@@ -42,7 +41,7 @@ export default {
     },
     async createNewPost(context, form) {
       context.commit("actionResponse/runSpinner", null, { root: true });
-      //console.log(form);
+
       const data = new FormData();
       data.append("file", form.image);
       data.append("data", JSON.stringify(form.data));
@@ -77,18 +76,15 @@ export default {
       }
     },
     async getPost(context, id) {
-      console.log(id);
       try {
         let data = await fetch(config.backendAPI + "/posts/" + id, {
           credentials: "include",
           method: "get"
         });
         let res = await data.json();
-        console.log(res);
         context.commit("setPost", res.post);
 
         if (res) {
-          console.log(router.currentRoute.path);
           if (router.currentRoute.path != "/post") {
             router.push("/post");
           }
@@ -106,7 +102,6 @@ export default {
       }
     },
     async addReply(context, reply) {
-      console.log(reply);
       try {
         let res = await fetch(config.backendAPI + "/replies", {
           method: "post",
@@ -116,7 +111,6 @@ export default {
         });
 
         if (res.status >= 200 && res.status < 300) {
-          console.log(reply.post);
           context.dispatch("getPost", reply.post);
         } else {
           console.error(res.statusText);
@@ -129,7 +123,6 @@ export default {
           );
         }
       } catch (error) {
-        console.log("getPost fail");
         console.error(error);
         context.commit("actionResponse/addReplayError", "Adde Reply Failed", {
           root: true
@@ -145,7 +138,6 @@ export default {
     setPosts(state, posts) {
       state.posts = posts;
       state.displayPosts = posts;
-      console.log(state.displayPosts);
     },
     setPost(state, post) {
       state.currentPost = post;
