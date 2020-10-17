@@ -28,8 +28,7 @@ export default {
             root: true
           });
         } else {
-          console.log(res.session);
-          console.log(res.cookie);
+          console.log(res);
           context.commit("setUser", res.user);
           router.push("/");
 
@@ -74,17 +73,18 @@ export default {
     },
     async logout(context) {
       try {
-        await fetch(config.backendAPI + "/user-session/", {
+        let res = await fetch(config.backendAPI + "/user-session/", {
           credentials: "include",
           method: "delete"
         });
         context.commit("clearUser");
+        localStorage.clear();
       } catch (error) {
         console.error(error);
-        context.commit("clearUser");
       }
-      localStorage.clear();
+      
       window.location.reload();
+      
     }
   },
 
