@@ -73,7 +73,7 @@ export default {
     },
     async logout(context) {
       try {
-        let res = await fetch(config.backendAPI + "/user-session/", {
+        await fetch(config.backendAPI + "/user-session/", {
           credentials: "include",
           method: "delete"
         });
