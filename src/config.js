@@ -1,5 +1,5 @@
 const dev = {
-  backendAPI: "http://localhost:3000"
+  backendAPI: "https://discussion-board-backend.herokuapp.com"
 };
 
 module.exports = dev;
