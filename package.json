@@ -15,7 +15,7 @@
     "bootstrap-vue": "^2.13.0",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "semantic-ui-vue": "^0.10.1",
     "serve-static": "^1.14.1",
     "vee-validate": "^3.3.0",
